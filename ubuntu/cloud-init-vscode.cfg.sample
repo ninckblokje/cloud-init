@@ -1,0 +1,23 @@
+#cloud-config
+timezone: Europe/Amsterdam
+
+package_update: true
+package_upgrade: true
+
+groups:
+  - vscode
+  - docker
+
+users:
+  - name: vscode
+    primary_group: vscode
+    groups: users, admin, docker
+    lock_passwd: true
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - [PUBLIC_KEY]
+
+snap:
+  commands:
+    00: ['install','docker']
