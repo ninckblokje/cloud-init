@@ -1,0 +1,22 @@
+#cloud-config
+timezone: Europe/Amsterdam
+
+package_update: true
+package_upgrade: true
+
+groups:
+  - lxd
+
+users:
+  - name: lxd
+    primary_group: lxd
+    groups: users, admin
+    lock_passwd: true
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - [PUBLIC_KEY]
+
+snap:
+  commands:
+    00: ['install','lxd']
